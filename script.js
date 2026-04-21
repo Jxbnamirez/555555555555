@@ -10,7 +10,7 @@ const songs = [
         title: "YOUNG J - ข่าวลือ", 
         file: "YOUNG-J-ข่าวลือ-_Music-Video_.mp3", 
         cover: "songcover2.jpg",
-        video: "YOUNG-J-ข่าวลือ-_Music-Video_.mp4" 
+        video: "YOUNG-J-ข่าวลือ-_Music-Video_.mov" 
     }
 ];
 
