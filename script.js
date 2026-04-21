@@ -10,6 +10,7 @@ const songs = [
         title: "YOUNG J - ข่าวลือ", 
         file: "YOUNG-J-ข่าวลือ-_Music-Video_.mp3", 
         cover: "songcover2.jpg",
+        // แนะนำให้แปลงไฟล์ .mov เป็น .mp4 เพื่อความเสถียรสูงสุด
         video: "YOUNG-J-ข่าวลือ-_Music-Video_.mov" 
     }
 ];
@@ -29,37 +30,57 @@ const durationEl = document.getElementById('duration');
 const titleEl = document.getElementById('song-title');
 const coverEl = document.getElementById('song-cover');
 
-// โหลดเพลงและวิดีโอ
+// ฟังก์ชันโหลดเนื้อหา
 function loadContent(song) {
-    // อัปเดตข้อมูลเพลง
     titleEl.innerText = song.title;
     audio.src = song.file;
     coverEl.src = song.cover;
     
-    // อัปเดตวิดีโอพื้นหลัง
+    // เปลี่ยนวิดีโอพื้นหลังพร้อมเช็คการเล่น
+    bgVideo.style.opacity = "0"; // ค่อยๆ จางออกตอนเปลี่ยน
     videoSource.src = song.video;
+    
+    // สำคัญ: ต้องโหลดใหม่ทุกครั้งที่เปลี่ยน src
     bgVideo.load(); 
-    bgVideo.play();
+    
+    // รอให้วิดีโอพร้อมเล่นแล้วค่อยแสดงผล
+    bgVideo.oncanplay = () => {
+        bgVideo.style.opacity = "1";
+        bgVideo.play().catch(() => console.log("Video autoplay prevented"));
+    };
 }
 
+// ฟังก์ชันควบคุมการเล่น
 function togglePlay() {
     if (audio.paused) {
-        audio.play().catch(() => console.log("Blocked"));
-        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        const audioPromise = audio.play();
+        if (audioPromise !== undefined) {
+            audioPromise.then(() => {
+                bgVideo.play(); // เล่นวิดีโอไปพร้อมกับเสียง
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }).catch(error => console.log("Playback error:", error));
+        }
     } else {
         audio.pause();
+        bgVideo.pause(); // หยุดวido ไปพร้อมกับเสียง
         playBtn.innerHTML = '<i class="fas fa-play"></i>';
     }
 }
 
+// ฟังก์ชันเปลี่ยนเพลง
 function changeSong(dir) {
     songIndex = (songIndex + dir + songs.length) % songs.length;
     loadContent(songs[songIndex]);
-    audio.play();
-    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    
+    // รอโหลดไฟล์เสียงเสร็จแล้วเล่นทันที
+    audio.oncanplay = () => {
+        audio.play();
+        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        audio.oncanplay = null; // ลบ event ออกเพื่อไม่ให้ทำงานซ้ำ
+    };
 }
 
-// Events
+// --- Events Setup ---
 playBtn.addEventListener('click', togglePlay);
 prevBtn.addEventListener('click', () => changeSong(-1));
 nextBtn.addEventListener('click', () => changeSong(1));
@@ -72,14 +93,19 @@ audio.ontimeupdate = () => {
     }
 };
 
-audio.onloadedmetadata = () => durationEl.innerText = formatTime(audio.duration);
+audio.onloadedmetadata = () => {
+    durationEl.innerText = formatTime(audio.duration);
+};
 
 progressContainer.addEventListener('click', (e) => {
     const width = progressContainer.clientWidth;
-    audio.currentTime = (e.offsetX / width) * audio.duration;
+    const clickX = e.offsetX;
+    if (audio.duration) {
+        audio.currentTime = (clickX / width) * audio.duration;
+    }
 });
 
-audio.onended = () => changeSong(1); // เล่นเพลงถัดไปเมื่อจบ
+audio.onended = () => changeSong(1);
 
 function formatTime(sec) {
     let m = Math.floor(sec / 60);
@@ -87,7 +113,7 @@ function formatTime(sec) {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
 }
 
-// --- 2. เอฟเฟกต์หิมะ ---
+// --- 2. เอฟเฟกต์หิมะ (ใช้โค้ดเดิมของคุณที่ทำงานได้ดีอยู่แล้ว) ---
 const canvas = document.getElementById('snow-canvas');
 const ctx = canvas.getContext('2d');
 let w, h, flakes = [];
@@ -125,4 +151,6 @@ function drawSnow() {
 window.addEventListener('resize', initSnow);
 initSnow();
 drawSnow();
-loadContent(songs[songIndex]); // เริ่มต้นโหลดเพลงแรก
+
+// เริ่มต้นโหลดเนื้อหาเพลงแรก
+loadContent(songs[songIndex]);
