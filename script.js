@@ -11,7 +11,7 @@ const songs = [
         file: "YOUNG-J-ข่าวลือ-_Music-Video_.mp3", 
         cover: "songcover2.jpg",
         // แนะนำให้แปลงไฟล์ .mov เป็น .mp4 เพื่อความเสถียรสูงสุด
-        video: "YOUNG-J-ข่าวลือ-_Music-Video_.mov" 
+        video: "YOUNG-J-ข่าวลือ-_Music-Video_.mp4" 
     }
 ];
 
