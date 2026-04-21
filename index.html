@@ -10,8 +10,8 @@
 </head>
 <body>
 
-    <video autoplay loop muted playsinline class="video-bg">
-        <source src="ILLSLICK - ตีหนึ่งที่คูเมือง [Official Video].mp4" type="video/mp4">
+    <video autoplay loop muted playsinline class="video-bg" id="bg-video">
+        <source src="ILLSLICK - ตีหนึ่งที่คูเมือง [Official Video].mp4" type="video/mp4" id="video-source">
     </video>
 
     <div class="background-overlay"></div>
@@ -30,21 +30,35 @@
         </div>
 
         <div class="music-player-ux">
-            <img src="songcover.jpg" alt="song cover" class="song-cover">
+            <img src="songcover.jpg" alt="song cover" class="song-cover" id="song-cover">
             <div class="song-details">
-                <span class="song-title">YUNGTARR - blonde</span>
+                <span class="song-title" id="song-title">กำลังโหลด...</span>
+                
                 <div class="progress-container" id="progress-container">
                     <div class="progress-bar" id="progress"></div>
                 </div>
-                <div class="controls">
-                    <span id="current-time">0:00</span>
-                    <button id="play-btn"><i class="fas fa-play"></i></button>
-                    <span id="duration">0:00</span>
+
+                <div class="controls-wrapper">
+                    <span class="time-display" id="current-time">0:00</span>
+                    
+                    <div class="main-buttons">
+                        <button class="ctrl-btn" id="prev-btn" title="เพลงก่อนหน้า">
+                            <i class="fas fa-backward-step"></i>
+                        </button>
+                        <button class="ctrl-btn play-btn-main" id="play-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="ctrl-btn" id="next-btn" title="เพลงถัดไป">
+                            <i class="fas fa-forward-step"></i>
+                        </button>
+                    </div>
+
+                    <span class="time-display" id="duration">0:00</span>
                 </div>
             </div>
         </div>
 
-        <audio id="audio" src="song.mp3"></audio>
+        <audio id="audio"></audio>
     </div>
 
     <script src="script.js"></script>
