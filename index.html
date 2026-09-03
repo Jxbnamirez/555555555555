@@ -2,68 +2,70 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/svg+xml" href="prem.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nongprem ❄</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Nongprem Profile</title>
+    <!-- FontAwesome สำหรับไอคอนโซเชียลและปุ่มกด -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <video autoplay loop muted playsinline class="video-bg" id="bg-video">
-        <source src="snaptik_7679024904334740757_v3.mp4" type="video/mp4" id="video-source">
+    <!-- วิดีโอพื้นหลัง -->
+    <video autoplay loop muted playsinline class="video-bg">
+        <source src="bg.mp4" type="video/mp4">
     </video>
-
     <div class="background-overlay"></div>
 
+    <!-- Canvas สำหรับเอฟเฟกต์หิมะ -->
     <canvas id="snow-canvas"></canvas>
 
+    <!-- การ์ดโปรไฟล์หลัก -->
     <div class="profile-card">
         
+        <!-- ส่วนรูปโปรไฟล์และกรอบกะโหลก -->
         <div class="profile-img-container">
-            <img src="IMG_4618.jpeg" alt="profile" class="profile-img">
-            <img src="image.png" alt="skull frame" class="avatar-frame">
+            <img src="avatar.jpg" alt="Profile" class="profile-img">
+            <img src="frame.png" alt="Frame" class="avatar-frame">
         </div>
 
-        <h1 class="username">u ้ อ ง l ป ร ม</h1>
+        <!-- ชื่อโปรไฟล์ -->
+        <h1 class="username">น้ อ ง | ป ร ม</h1>
 
+        <!-- ไอคอนโซเชียลมีเดีย -->
         <div class="social-icons">
-            <a href="https://discord.gg/h8euBk8YPW" target="_blank"><i class="fab fa-discord"></i></a>
-            <a href="https://www.instagram.com/punnawit.tz" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@nongpremchie" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.facebook.com/share/1FK2bHWbWw/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-discord"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
         </div>
 
+        <!-- เครื่องเล่นเพลง (Music Player) -->
         <div class="music-player-ux">
-            <img src="IMG_0700.jpeg" alt="song cover" class="song-cover" id="song-cover">
+            <img src="song-cover.jpg" alt="Song Cover" class="song-cover">
+            
             <div class="song-details">
-                <span class="song-title" id="song-title">กำลังโหลด...</span>
+                <span class="song-title">loading - central cee</span>
                 
                 <div class="progress-container" id="progress-container">
-                    <div class="progress-bar" id="progress"></div>
+                    <div class="progress-bar" id="progress-bar"></div>
                 </div>
 
                 <div class="controls-wrapper">
-                    <span class="time-display" id="current-time">0:00</span>
-                    
                     <div class="main-buttons">
-                        <button class="ctrl-btn" id="prev-btn" title="เพลงก่อนหน้า">
-                            <i class="fas fa-backward-step"></i>
-                        </button>
-                        <button class="ctrl-btn play-btn-main" id="play-btn">
-                            <i class="fas fa-play" id="play-icon"></i>
-                        </button>
-                        <button class="ctrl-btn" id="next-btn" title="เพลงถัดไป">
-                            <i class="fas fa-forward-step"></i>
-                        </button>
+                        <button class="ctrl-btn" id="prev-btn"><i class="fa-solid fa-backward-step"></i></button>
+                        <button class="ctrl-btn play-btn-main" id="play-btn"><i class="fa-solid fa-play" id="play-icon"></i></button>
+                        <button class="ctrl-btn" id="next-btn"><i class="fa-solid fa-forward-step"></i></button>
                     </div>
-
-                    <span class="time-display" id="duration">0:00</span>
+                    <div class="time-display">
+                        <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+                    </div>
                 </div>
             </div>
+
+            <!-- ไฟล์เสียง -->
+            <audio id="audio-player" src="song.mp3"></audio>
         </div>
 
-        <audio id="audio"></audio>
     </div>
 
     <script src="script.js"></script>
