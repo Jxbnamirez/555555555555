@@ -62,22 +62,22 @@ body {
 }
 
 /* ====================================================
-   ขยายรูปโปรไฟล์ให้ใหญ่เต็มวงกลมของกรอบกะโหลกพอดี
+   ขยาย Avatar ใหญ่พิเศษ + กรอบกะโหลก
    ==================================================== */
 .profile-img-container {
     position: relative;
-    width: 1000px;
-    height: 1000px;
-    margin: -10px auto -15px auto;
+    width: 220px;
+    height: 220px;
+    margin: -15px auto -10px auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* รูปโปรไฟล์กลม (ขยายเต็มวงกลมภายในกรอบ) */
+/* รูปโปรไฟล์กลม (ขยายใหญ่ขึ้นอีกเยอะ) */
 .profile-img {
-    width: 200px;           /* ขยายให้เต็มช่องกรอบกะโหลกพอดี */
-    height: 200px;
+    width: 140px;           /* ขยายขนาดความกว้าง */
+    height: 140px;          /* ขยายขนาดความสูง */
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
@@ -85,7 +85,7 @@ body {
     
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -39%); /* จัดตำแหน่งกึ่งกลางช่องกรอบ */
+    transform: translate(-50%, -38%); /* จัดตำแหน่งให้พอดีช่องกรอบ */
 }
 
 /* ภาพกรอบกะโหลกโปร่งใส */
@@ -98,7 +98,7 @@ body {
     object-fit: contain;
     z-index: 2;
     pointer-events: none;
-    transform: scale(1.05);
+    transform: scale(1.1);  /* ปรับขยายกรอบตาม */
 }
 
 /* ====================================================
