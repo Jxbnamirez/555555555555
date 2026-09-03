@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ====================================================
     // 1. รายชื่อเพลงใน Playlist (เพิ่ม/ลด เพลงตรงนี้ได้เลย)
     // ====================================================
-    const playlist = [
+        const playlist = [
         {
             title: "loading - central cee",
             cover: "song-cover.jpg",
@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             title: "doja - central cee",
-            cover: "song-cover2.jpg",
-            src: "song2.mp3"
+            cover: "songcover2.jpg",
+            src: "ssstik.io_1788400972110.mp3"
         }
     ];
 
