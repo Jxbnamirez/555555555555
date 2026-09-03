@@ -76,8 +76,8 @@ body {
 
 /* รูปโปรไฟล์กลม (ขยายเต็มวงกลมภายในกรอบ) */
 .profile-img {
-    width: 115px;           /* ขยายให้เต็มช่องกรอบกะโหลกพอดี */
-    height: 115px;
+    width: 200px;           /* ขยายให้เต็มช่องกรอบกะโหลกพอดี */
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
