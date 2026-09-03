@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -59,62 +59,87 @@ body {
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
 }
 
-/* คอนเทนเนอร์รูปโปรไฟล์ + กรอบเคลื่อนไหว Discord */
+/* --- กรอบ Discord Orbs เคลื่อนไหว --- */
 .profile-img-container {
     position: relative;
-    width: 130px;
-    height: 130px;
-    margin: 0 auto 15px auto;
+    width: 135px;
+    height: 135px;
+    margin: 0 auto 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .profile-img {
-    width: 110px;
-    height: 110px;
+    width: 95px;
+    height: 95px;
     border-radius: 50%;
     object-fit: cover;
-    z-index: 2;
-    position: relative;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* กรอบนีออนเคลื่อนไหวแบบหมุน + เปล่งแสง */
-.avatar-frame {
+/* ตัวกรอบ SVG */
+.discord-orbs-frame {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
-    background: linear-gradient(45deg, #ff007f, #7928ca, #00dfd8, #ff007f);
-    background-size: 300% 300%;
-    animation: rotateGradient 4s linear infinite, pulseGlow 2s ease-in-out infinite alternate;
-    z-index: 1;
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.8)) drop-shadow(0 0 12px rgba(79, 172, 254, 0.6));
 }
 
-@keyframes rotateGradient {
-    0% {
-        background-position: 0% 50%;
-        transform: rotate(0deg);
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-        transform: rotate(360deg);
-    }
+.orb-ring {
+    fill: none;
+    stroke-linecap: round;
 }
 
-@keyframes pulseGlow {
-    0% {
-        box-shadow: 0 0 10px rgba(0, 223, 216, 0.6), 0 0 20px rgba(121, 40, 202, 0.4);
-    }
-    100% {
-        box-shadow: 0 0 20px rgba(255, 0, 127, 0.8), 0 0 35px rgba(0, 223, 216, 0.6);
-    }
+.ring-1 {
+    stroke: url(#orbGradient1);
+    stroke-width: 3;
+    stroke-dasharray: 180 100;
+    transform-origin: center;
+    animation: spinRing 2s linear infinite;
 }
+
+.ring-2 {
+    stroke: #00f2fe;
+    stroke-width: 1.5;
+    stroke-dasharray: 80 180;
+    transform-origin: center;
+    animation: spinRingReverse 3s linear infinite;
+    opacity: 0.7;
+}
+
+.ring-3 {
+    stroke: url(#orbGradient2);
+    stroke-width: 4;
+    stroke-dasharray: 40 200;
+    transform-origin: center;
+    animation: spinRing 1.5s ease-in-out infinite alternate;
+}
+
+.orbs-group {
+    transform-origin: center;
+    animation: spinRing 2.5s linear infinite;
+}
+
+.orb-head {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 5px #00f2fe);
+}
+
+@keyframes spinRing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spinRingReverse {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+}
+/* ---------------------------------- */
 
 .username {
     font-size: 24px;
