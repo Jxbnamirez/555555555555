@@ -66,8 +66,8 @@ body {
    ==================================================== */
 .profile-img-container {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 1000px;
+    height: 1000px;
     margin: -10px auto -15px auto;
     display: flex;
     justify-content: center;
