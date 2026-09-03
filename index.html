@@ -2,9 +2,9 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nongprem Profile</title>
-    <!-- FontAwesome สำหรับไอคอนโซเชียลและปุ่มกด -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>u ้ o ง | ป ร ม</title>
+    <!-- FontAwesome ไอคอนโซเชียลและเครื่องเล่นเพลง -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -16,7 +16,7 @@
     </video>
     <div class="background-overlay"></div>
 
-    <!-- Canvas สำหรับเอฟเฟกต์หิมะ -->
+    <!-- Canvas เอฟเฟกต์หิมะตก -->
     <canvas id="snow-canvas"></canvas>
 
     <!-- การ์ดโปรไฟล์หลัก -->
@@ -33,28 +33,30 @@
 
         <!-- ไอคอนโซเชียลมีเดีย -->
         <div class="social-icons">
-            <a href="#" target="_blank"><i class="fa-brands fa-discord"></i></a>
-            <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
         </div>
 
-        <!-- เครื่องเล่นเพลง (Music Player) -->
+        <!-- เครื่องเล่นเพลง (Music Player UI) -->
         <div class="music-player-ux">
             <img src="song-cover.jpg" alt="Song Cover" class="song-cover">
             
             <div class="song-details">
                 <span class="song-title">loading - central cee</span>
                 
+                <!-- แถบเล่นเพลง -->
                 <div class="progress-container" id="progress-container">
                     <div class="progress-bar" id="progress-bar"></div>
                 </div>
 
+                <!-- ปุ่มควบคุมและเวลา -->
                 <div class="controls-wrapper">
                     <div class="main-buttons">
-                        <button class="ctrl-btn" id="prev-btn"><i class="fa-solid fa-backward-step"></i></button>
-                        <button class="ctrl-btn play-btn-main" id="play-btn"><i class="fa-solid fa-play" id="play-icon"></i></button>
-                        <button class="ctrl-btn" id="next-btn"><i class="fa-solid fa-forward-step"></i></button>
+                        <button class="ctrl-btn" id="prev-btn" aria-label="Previous"><i class="fa-solid fa-backward-step"></i></button>
+                        <button class="ctrl-btn play-btn-main" id="play-btn" aria-label="Play/Pause"><i class="fa-solid fa-play" id="play-icon"></i></button>
+                        <button class="ctrl-btn" id="next-btn" aria-label="Next"><i class="fa-solid fa-forward-step"></i></button>
                     </div>
                     <div class="time-display">
                         <span id="current-time">0:00</span> / <span id="duration">0:00</span>
@@ -62,8 +64,8 @@
                 </div>
             </div>
 
-            <!-- ไฟล์เสียง -->
-            <audio id="audio-player" src="ssstik.io_1788400972110.mp3"></audio>
+            <!-- แท็ก Audio สำคัญสำหรับระบบ JavaScript -->
+            <audio id="audio-player" preload="metadata"></audio>
         </div>
 
     </div>
