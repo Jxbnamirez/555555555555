@@ -59,19 +59,67 @@ body {
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
 }
 
+/* คอนเทนเนอร์รูปโปรไฟล์ + กรอบเคลื่อนไหว Discord */
+.profile-img-container {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .profile-img {
     width: 110px;
     height: 110px;
     border-radius: 50%;
-    border: 3px solid rgba(255, 255, 255, 0.4);
-    margin-bottom: 15px;
     object-fit: cover;
+    z-index: 2;
+    position: relative;
+}
+
+/* กรอบนีออนเคลื่อนไหวแบบหมุน + เปล่งแสง */
+.avatar-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff007f, #7928ca, #00dfd8, #ff007f);
+    background-size: 300% 300%;
+    animation: rotateGradient 4s linear infinite, pulseGlow 2s ease-in-out infinite alternate;
+    z-index: 1;
+}
+
+@keyframes rotateGradient {
+    0% {
+        background-position: 0% 50%;
+        transform: rotate(0deg);
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 10px rgba(0, 223, 216, 0.6), 0 0 20px rgba(121, 40, 202, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 0, 127, 0.8), 0 0 35px rgba(0, 223, 216, 0.6);
+    }
 }
 
 .username {
     font-size: 24px;
     margin-bottom: 20px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .social-icons {
@@ -108,10 +156,13 @@ body {
     height: 65px;
     border-radius: 12px;
     object-fit: cover;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.song-details { flex: 1; overflow: hidden; }
+.song-details {
+    flex: 1;
+    overflow: hidden;
+}
 
 .song-title {
     font-size: 13px;
@@ -145,7 +196,11 @@ body {
     align-items: center;
 }
 
-.main-buttons { display: flex; gap: 12px; align-items: center; }
+.main-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
 
 .ctrl-btn {
     background: rgba(255, 255, 255, 0.08);
@@ -172,6 +227,13 @@ body {
     transform: scale(1.1) translateY(-2px);
 }
 
-.time-display { font-size: 10px; color: rgba(255, 255, 255, 0.5); }
+.time-display {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+}
 
-@media (max-width: 400px) { .profile-card { width: 90%; } }
+@media (max-width: 400px) {
+    .profile-card {
+        width: 90%;
+    }
+}
