@@ -46,12 +46,12 @@ body {
     pointer-events: none;
 }
 
-/* การ์ดโปรไฟล์ */
+/* การ์ดโปรไฟล์หลัก */
 .profile-card {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 28px;
-    padding: 35px 25px;
+    padding: 30px 25px;
     width: 360px;
     text-align: center;
     color: white;
@@ -59,26 +59,32 @@ body {
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
 }
 
-/* --- ปรับขนาดกรอบกะโหลกให้ครอบเฉพาะรูปโปรไฟล์ตรงกลาง --- */
+/* ====================================================
+   ส่วนกรอบกะโหลก + รูปโปรไฟล์ (ปรับตำแหน่งให้ตรงเป๊ะ)
+   ==================================================== */
 .profile-img-container {
     position: relative;
-    width: 150px;  /* กำหนดขนาดกรอบกะโหลกให้พอดีการ์ด */
-    height: 150px;
-    margin: 0 auto 15px auto;
+    width: 180px;         /* ขนาดกรอบกะโหลก */
+    height: 180px;
+    margin: 0 auto 5px auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* รูปโปรไฟล์ด้านใน */
+/* รูปโปรไฟล์กลมตรงกลาง */
 .profile-img {
-    width: 80px;  /* ขนาดย่อลงเพื่อให้สวมเข้าในวงกะโหลกพอดี */
-    height: 80px;
+    width: 78px;          /* ขนาดรูปโปรไฟล์ */
+    height: 78px;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
     z-index: 1;
-    top: 36px;    /* ปรับตำแหน่งให้อยู่ตรงกลางวงกลมของกะโหลก */
+    
+    /* ขยับรูปโปรไฟล์ให้ลงมาตรงกับช่องว่างวงกะโหลกพอดี */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -28%); 
 }
 
 /* ภาพกรอบกะโหลก */
@@ -92,16 +98,19 @@ body {
     z-index: 2;
     pointer-events: none;
     
-    /* กรองสีดำออก ให้เหลือเฉพาะลายกะโหลกสีขาว */
+    /* กรองสีดำออก เหลือเฉพาะลายกะโหลกสีขาว */
     mix-blend-mode: screen; 
     filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
-/* ---------------------------------------------------- */
 
+/* ====================================================
+   ส่วนข้อความและไอคอนโซเชียล
+   ==================================================== */
 .username {
     font-size: 22px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
 }
 
 .social-icons {
@@ -122,11 +131,13 @@ body {
     color: #1db954;
 }
 
-/* เครื่องเล่นเพลง UX/UI */
+/* ====================================================
+   ส่วนเครื่องเล่นเพลง (Music Player UI)
+   ==================================================== */
 .music-player-ux {
     background: rgba(0, 0, 0, 0.4);
     border-radius: 20px;
-    padding: 18px;
+    padding: 16px;
     display: flex;
     gap: 15px;
     align-items: center;
@@ -150,7 +161,7 @@ body {
     font-size: 13px;
     font-weight: 500;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -158,10 +169,10 @@ body {
 
 .progress-container {
     height: 5px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .progress-bar {
@@ -180,7 +191,7 @@ body {
 
 .main-buttons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
 }
 
@@ -194,6 +205,9 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .play-btn-main {
