@@ -1,166 +1,106 @@
-// --- 1. ข้อมูลเพลงและวิดีโอ ---
-const songs = [
-    { 
-        title: "loading - central cee", 
-        file: "ssstik.io_1788400972110.mp3", 
-        cover: "IMG_0700.jpeg",
-        video: "snaptik_7679024904334740757_v3.mp4" 
-    },
-    { 
-        title: "Beretta", 
-        file: "ssstik.io_1788403678588.mp3", 
-        cover: "IMG_0702.jpeg",
-        video: "snaptik_7673838347806133511_v3.mp4" 
-    }
-];
+document.addEventListener("DOMContentLoaded", () => {
+    // --------------------------------------------------
+    // 1. ระบบเครื่องเล่นเพลง (Music Player)
+    // --------------------------------------------------
+    const audio = document.getElementById("audio-player");
+    const playBtn = document.getElementById("play-btn");
+    const playIcon = document.getElementById("play-icon");
+    const progressBar = document.getElementById("progress-bar");
+    const progressContainer = document.getElementById("progress-container");
+    const currentTimeEl = document.getElementById("current-time");
+    const durationEl = document.getElementById("duration");
 
-let songIndex = 0;
-const audio = document.getElementById('audio');
-const bgVideo = document.getElementById('bg-video');
-const videoSource = document.getElementById('video-source');
+    let isPlaying = false;
 
-const playBtn = document.getElementById('play-btn');
-const playIcon = document.getElementById('play-icon');
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
-const progress = document.getElementById('progress');
-const progressContainer = document.getElementById('progress-container');
-const currentTimeEl = document.getElementById('current-time');
-const durationEl = document.getElementById('duration');
-const titleEl = document.getElementById('song-title');
-const coverEl = document.getElementById('song-cover');
-
-// ฟังก์ชันอัปเดตไอคอนเล่น/หยุด
-function updatePlayIcon(isPlaying) {
-    if (!playIcon) return;
-    if (isPlaying) {
-        playIcon.classList.remove('fa-play');
-        playIcon.classList.add('fa-pause');
-    } else {
-        playIcon.classList.remove('fa-pause');
-        playIcon.classList.add('fa-play');
-    }
-}
-
-// ฟังก์ชันโหลดเนื้อหาเพลงและวิดีโอ
-function loadContent(song) {
-    titleEl.innerText = song.title;
-    audio.src = song.file;
-    coverEl.src = song.cover;
-    
-    // เปลี่ยนวิดีโอพื้นหลังพร้อมเอฟเฟกต์ Fade
-    if (bgVideo && videoSource) {
-        bgVideo.style.opacity = "0";
-        videoSource.src = song.video;
-        bgVideo.load(); 
-        
-        bgVideo.oncanplay = () => {
-            bgVideo.style.opacity = "1";
-            bgVideo.play().catch(() => console.log("Video autoplay prevented"));
-        };
-    }
-}
-
-// ฟังก์ชันควบคุมการเล่น/หยุด
-function togglePlay() {
-    if (audio.paused) {
-        const audioPromise = audio.play();
-        if (audioPromise !== undefined) {
-            audioPromise.then(() => {
-                if (bgVideo) bgVideo.play();
-                updatePlayIcon(true);
-            }).catch(error => console.log("Playback error:", error));
+    // เล่น / หยุดเพลง
+    function togglePlay() {
+        if (isPlaying) {
+            audio.pause();
+            playIcon.classList.remove("fa-pause");
+            playIcon.classList.add("fa-play");
+        } else {
+            audio.play();
+            playIcon.classList.remove("fa-play");
+            playIcon.classList.add("fa-pause");
         }
-    } else {
-        audio.pause();
-        if (bgVideo) bgVideo.pause();
-        updatePlayIcon(false);
+        isPlaying = !isPlaying;
     }
-}
 
-// ฟังก์ชันเปลี่ยนเพลง
-function changeSong(dir) {
-    songIndex = (songIndex + dir + songs.length) % songs.length;
-    loadContent(songs[songIndex]);
-    
-    audio.oncanplay = () => {
-        audio.play();
-        updatePlayIcon(true);
-        audio.oncanplay = null;
-    };
-}
+    playBtn.addEventListener("click", togglePlay);
 
-// --- Events Setup ---
-playBtn.addEventListener('click', togglePlay);
-prevBtn.addEventListener('click', () => changeSong(-1));
-nextBtn.addEventListener('click', () => changeSong(1));
+    // อัปเดต Progress Bar และ เวลา
+    audio.addEventListener("timeupdate", () => {
+        if (audio.duration) {
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
 
-audio.ontimeupdate = () => {
-    if (audio.duration) {
-        const pct = (audio.currentTime / audio.duration) * 100;
-        progress.style.width = pct + '%';
-        currentTimeEl.innerText = formatTime(audio.currentTime);
+            // คำนวณเวลาปัจจุบัน
+            const currentMinutes = Math.floor(audio.currentTime / 60);
+            const currentSeconds = Math.floor(audio.currentTime % 60);
+            currentTimeEl.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+
+            // คำนวณเวลารวม
+            const durationMinutes = Math.floor(audio.duration / 60);
+            const durationSeconds = Math.floor(audio.duration % 60);
+            durationEl.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+        }
+    });
+
+    // กดที่แถบเพลงเพื่อข้ามตำแหน่ง
+    progressContainer.addEventListener("click", (e) => {
+        const width = progressContainer.clientWidth;
+        const clickX = e.offsetX;
+        const duration = audio.duration;
+        if (duration) {
+            audio.currentTime = (clickX / width) * duration;
+        }
+    });
+
+    // --------------------------------------------------
+    // 2. เอฟเฟกต์หิมะตก (Snow Animation Canvas)
+    // --------------------------------------------------
+    const canvas = document.getElementById("snow-canvas");
+    const ctx = canvas.getContext("2d");
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    const numFlakes = 80;
+    const flakes = [];
+
+    for (let i = 0; i < numFlakes; i++) {
+        flakes.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 2 + 1,
+            speed: Math.random() * 1 + 0.5,
+            opacity: Math.random() * 0.7 + 0.3
+        });
     }
-};
 
-audio.onloadedmetadata = () => {
-    durationEl.innerText = formatTime(audio.duration);
-};
+    function drawSnow() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = "white";
 
-progressContainer.addEventListener('click', (e) => {
-    const width = progressContainer.clientWidth;
-    const clickX = e.offsetX;
-    if (audio.duration) {
-        audio.currentTime = (clickX / width) * audio.duration;
+        for (let flake of flakes) {
+            ctx.beginPath();
+            ctx.globalAlpha = flake.opacity;
+            ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            flake.y += flake.speed;
+            if (flake.y > height) {
+                flake.y = -5;
+                flake.x = Math.random() * width;
+            }
+        }
+        requestAnimationFrame(drawSnow);
     }
+
+    drawSnow();
 });
-
-audio.onended = () => changeSong(1);
-
-function formatTime(sec) {
-    let m = Math.floor(sec / 60);
-    let s = Math.floor(sec % 60);
-    return `${m}:${s < 10 ? '0' : ''}${s}`;
-}
-
-// --- 2. เอฟเฟกต์หิมะ (Snow Canvas) ---
-const canvas = document.getElementById('snow-canvas');
-const ctx = canvas.getContext('2d');
-let w, h, flakes = [];
-
-function initSnow() {
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
-    flakes = Array.from({ length: 140 }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 3 + 1,
-        d: Math.random() * 1
-    }));
-}
-
-function drawSnow() {
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
-    ctx.beginPath();
-    flakes.forEach(f => {
-        ctx.moveTo(f.x, f.y);
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-    });
-    ctx.fill();
-    flakes.forEach(f => {
-        f.y += Math.pow(f.d, 2) + 0.8;
-        f.x += Math.sin(f.d) * 0.4;
-        if (f.y > h) f.y = -10, f.x = Math.random() * w;
-    });
-    requestAnimationFrame(drawSnow);
-}
-
-window.addEventListener('resize', initSnow);
-initSnow();
-drawSnow();
-
-// โหลดเพลงแรกเริ่มต้น
-loadContent(songs[songIndex]);
