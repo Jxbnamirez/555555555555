@@ -46,7 +46,7 @@ body {
     pointer-events: none;
 }
 
-/* การ์ดโปรไฟล์หลัก */
+/* การ์ดโปรไฟล์หลัก (คืนค่ากระจกใสเบลอ) */
 .profile-card {
     position: relative;
     background: rgba(255, 255, 255, 0.1);
@@ -57,11 +57,12 @@ body {
     text-align: center;
     color: white;
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
 }
 
 /* ====================================================
-   ส่วนกรอบกะโหลก (PNG โปร่งใส) + ปรับรูปโปรไฟล์ให้เต็มช่อง
+   ส่วนกรอบกะโหลก (PNG โปร่งใส) + รูปโปรไฟล์ขนาดพอดี
    ==================================================== */
 .profile-img-container {
     position: relative;
@@ -73,7 +74,7 @@ body {
     align-items: center;
 }
 
-/* รูปโปรไฟล์กลมตรงกลาง (ขยายเป็น 92px และขยับขึ้นให้เต็มช่องกรอบ) */
+/* รูปโปรไฟล์กลมตรงกลาง */
 .profile-img {
     width: 92px;
     height: 92px;
