@@ -49,31 +49,31 @@ body {
 /* การ์ดโปรไฟล์หลัก */
 .profile-card {
     position: relative;
-    background: rgba(0, 0, 0, 0.35); /* ใช้สีดำใสแทนการใส่ backdrop-filter ในตัวการ์ด */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 28px;
     padding: 30px 25px;
     width: 360px;
     text-align: center;
     color: white;
+    backdrop-filter: blur(15px);
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
 }
 
 /* ====================================================
-   ส่วนกรอบกะโหลก + รูปโปรไฟล์ (ขนาดใหญ่ + ดูดสีดำออกชัวร์)
+   ส่วนกรอบกะโหลก (PNG โปร่งใส) + รูปโปรไฟล์
    ==================================================== */
 .profile-img-container {
     position: relative;
-    width: 180px;         /* ขนาดพื้นที่คอนเทนเนอร์ใหญ่ */
+    width: 180px;
     height: 180px;
     margin: 0 auto 5px auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    isolation: isolate;   /* บังคับแยก Layer ในการคำนวณ Blend Mode */
 }
 
-/* รูปโปรไฟล์กลมตรงกลาง (ขยายใหญ่ 78px) */
+/* รูปโปรไฟล์กลมตรงกลาง */
 .profile-img {
     width: 78px;
     height: 78px;
@@ -87,10 +87,10 @@ body {
     transform: translate(-50%, -28%); 
 }
 
-/* ภาพกรอบกะโหลก */
+/* ภาพกรอบกะโหลกโปร่งใส */
 .avatar-frame {
     position: absolute;
-    top: -24px;           /* ขยับกรอบกะโหลกขึ้นครอบส่วนหัว */
+    top: -24px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -98,9 +98,7 @@ body {
     z-index: 2;
     pointer-events: none;
     
-    /* ดูดเฉพาะสีดำออกให้เหลือลายกะโหลกขาว */
-    mix-blend-mode: screen; 
-    filter: brightness(1.2) drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+    /* ถ้ารูปเป็น PNG แล้ว ไม่ต้องใส่ mix-blend-mode หรือ filter ใดๆ */
 }
 
 /* ====================================================
