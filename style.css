@@ -61,7 +61,7 @@ body {
 }
 
 /* ====================================================
-   ส่วนกรอบกะโหลก (PNG โปร่งใส) + รูปโปรไฟล์
+   ส่วนกรอบกะโหลก (PNG โปร่งใส) + ปรับรูปโปรไฟล์ให้เต็มช่อง
    ==================================================== */
 .profile-img-container {
     position: relative;
@@ -73,10 +73,10 @@ body {
     align-items: center;
 }
 
-/* รูปโปรไฟล์กลมตรงกลาง */
+/* รูปโปรไฟล์กลมตรงกลาง (ขยายเป็น 92px และขยับขึ้นให้เต็มช่องกรอบ) */
 .profile-img {
-    width: 78px;
-    height: 78px;
+    width: 92px;
+    height: 92px;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
@@ -84,7 +84,7 @@ body {
     
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -28%); 
+    transform: translate(-50%, -35%); 
 }
 
 /* ภาพกรอบกะโหลกโปร่งใส */
@@ -97,8 +97,6 @@ body {
     object-fit: contain;
     z-index: 2;
     pointer-events: none;
-    
-    /* ถ้ารูปเป็น PNG แล้ว ไม่ต้องใส่ mix-blend-mode หรือ filter ใดๆ */
 }
 
 /* ====================================================
