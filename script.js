@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             title: "loading - central cee",
             cover: "song-cover.jpg",
-            src: "song.mp3"
+            src: "Loading.mp3"
         },
         {
             title: "doja - central cee",
