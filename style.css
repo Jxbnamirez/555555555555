@@ -62,13 +62,13 @@ body {
 }
 
 /* ====================================================
-   ส่วนกรอบกะโหลก (ปรับตำแหน่งลงมา & ย่อให้พอดี)
+   ส่วนกรอบกะโหลก + Avatar (ขยายขนาดใหญ่เด่นชัด)
    ==================================================== */
 .profile-img-container {
     position: relative;
-    width: 150px;
-    height: 150px;
-    margin: 10px auto 0 auto;
+    width: 200px;
+    height: 200px;
+    margin: -10px auto -15px auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,8 +76,8 @@ body {
 
 /* รูปโปรไฟล์กลมตรงกลาง */
 .profile-img {
-    width: 72px;
-    height: 72px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
@@ -98,7 +98,7 @@ body {
     object-fit: contain;
     z-index: 2;
     pointer-events: none;
-    transform: scale(0.9);
+    transform: scale(1.05);
 }
 
 /* ====================================================
