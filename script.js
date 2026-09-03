@@ -3,7 +3,7 @@ const songs = [
     { 
         title: "loading - central cee", 
         file: "ssstik.io_1788400972110.mp3", 
-        cover: "songcover.jpg",
+        cover: "IMG_0700.jpeg",
         video: "snaptik_7679024904334740757_v3.mp4" 
     },
     { 
