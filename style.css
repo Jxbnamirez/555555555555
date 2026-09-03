@@ -60,11 +60,11 @@ body {
 }
 
 /* ====================================================
-   ส่วนกรอบกะโหลก + รูปโปรไฟล์ (ขนาดใหญ่แบบเดิม)
+   ส่วนกรอบกะโหลก + รูปโปรไฟล์ (ปรับตำแหน่งให้ตรงเป๊ะ)
    ==================================================== */
 .profile-img-container {
     position: relative;
-    width: 180px;         /* ขนาดพื้นที่คอนเทนเนอร์ใหญ่ */
+    width: 180px;         /* ขนาดกรอบกะโหลก */
     height: 180px;
     margin: 0 auto 5px auto;
     display: flex;
@@ -72,15 +72,16 @@ body {
     align-items: center;
 }
 
-/* รูปโปรไฟล์กลมตรงกลาง (ปรับขยายกลับเป็น 78px) */
+/* รูปโปรไฟล์กลมตรงกลาง */
 .profile-img {
-    width: 78px;          /* ขนาดใหญ่เดิม */
+    width: 78px;          /* ขนาดรูปโปรไฟล์ */
     height: 78px;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
     z-index: 1;
     
+    /* ขยับรูปโปรไฟล์ให้ลงมาตรงกับช่องว่างวงกะโหลกพอดี */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -28%); 
@@ -89,7 +90,7 @@ body {
 /* ภาพกรอบกะโหลก */
 .avatar-frame {
     position: absolute;
-    top: -24px;           /* ขยับกรอบกะโหลกขึ้นให้พอดีกับหัว */
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
@@ -97,7 +98,7 @@ body {
     z-index: 2;
     pointer-events: none;
     
-    /* กรองสีดำออก ให้เหลือเฉพาะลายกะโหลก */
+    /* กรองสีดำออก เหลือเฉพาะลายกะโหลกสีขาว */
     mix-blend-mode: screen; 
     filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
@@ -232,4 +233,3 @@ body {
         width: 90%;
     }
 }
-
