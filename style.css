@@ -46,7 +46,7 @@ body {
     pointer-events: none;
 }
 
-/* การ์ดโปรไฟล์หลัก (คืนค่ากระจกใสเบลอ) */
+/* การ์ดโปรไฟล์หลัก */
 .profile-card {
     position: relative;
     background: rgba(255, 255, 255, 0.1);
@@ -62,22 +62,22 @@ body {
 }
 
 /* ====================================================
-   ส่วนกรอบกะโหลก (PNG โปร่งใส) + รูปโปรไฟล์ขนาดพอดี
+   ส่วนกรอบกะโหลก + รูปโปรไฟล์ (ขนาดเป๊ะเต็มช่อง)
    ==================================================== */
 .profile-img-container {
     position: relative;
-    width: 500px;
-    height: 500px;
-    margin: 0 auto 5px auto;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto -10px auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* รูปโปรไฟล์กลมตรงกลาง */
+/* รูปโปรไฟล์กลมตรงกลาง (ปรับ 82px วางกึ่งกลางเป๊ะ) */
 .profile-img {
-    width: 2000px;
-    height: 2000px;
+    width: 82px;
+    height: 82px;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
@@ -85,13 +85,13 @@ body {
     
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -35%); 
+    transform: translate(-50%, -36%); 
 }
 
 /* ภาพกรอบกะโหลกโปร่งใส */
 .avatar-frame {
     position: absolute;
-    top: -24px;
+    top: -15px;
     left: 0;
     width: 100%;
     height: 100%;
