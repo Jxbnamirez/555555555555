@@ -74,8 +74,8 @@ body {
 
 /* รูปโปรไฟล์กลมตรงกลาง */
 .profile-img {
-    width: 78px;          /* ขนาดรูปโปรไฟล์ */
-    height: 78px;
+    width: 100px;          /* ขนาดรูปโปรไฟล์ */
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
