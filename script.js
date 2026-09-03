@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
             src: "Loading.mp3"
         },
         {
-            title: "doja - central cee",
-            cover: "songcover2.jpg",
-            src: "ssstik.io_1788400972110.mp3"
+            title: "Beretta",
+            cover: "IMG_0702.jpeg",
+            src: "Song2.mp3"
         }
     ];
 
