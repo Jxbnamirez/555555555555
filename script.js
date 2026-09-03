@@ -11,7 +11,7 @@ const songs = [
         file: "ssstik.io_1788403678588.mp3", 
         cover: "songcover2.jpg",
         // แนะนำให้แปลงไฟล์ .mov เป็น .mp4 เพื่อความเสถียรสูงสุด
-        video: "YOUNG-J-ข่าวลือ-_Music-Video_.mp4" 
+        video: "snaptik_7673838347806133511_v3.mp4" 
     }
 ];
 
