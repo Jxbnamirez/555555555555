@@ -55,7 +55,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 28px;
-    padding: 25px 20px;
+    padding: 25px 20px 15px 20px;
     width: 100%;
     max-width: 380px;
     text-align: center;
@@ -66,7 +66,7 @@ body {
 }
 
 /* ====================================================
-   ส่วน Avatar + กรอบกะโหลกแสงใส ละมุน
+   ส่วน Avatar + กรอบกะโหลกเรืองแสงใส
    ==================================================== */
 .profile-img-container {
     position: relative;
@@ -78,7 +78,6 @@ body {
     align-items: center;
 }
 
-/* รูปโปรไฟล์กลม */
 .profile-img {
     width: 102px;
     height: 102px;
@@ -86,13 +85,11 @@ body {
     object-fit: cover;
     position: absolute;
     z-index: 1;
-    
     top: 50%;
     left: 50%;
     transform: translate(-50%, -41%);
 }
 
-/* กรอบกะโหลก + แสงละมุนนุ่มนวล */
 .avatar-frame {
     position: absolute;
     top: 0;
@@ -102,7 +99,6 @@ body {
     object-fit: contain;
     z-index: 2;
     pointer-events: none;
-    
     filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
     animation: skullPulse 4s infinite ease-in-out;
 }
@@ -123,14 +119,13 @@ body {
 }
 
 /* ====================================================
-   ชื่อโปรไฟล์ เอฟเฟกต์สีรุ้งขยับได้ (Animated Rainbow)
+   ชื่อโปรไฟล์ เอฟเฟกต์สีรุ้ง
    ==================================================== */
 .username {
     font-size: 22px;
     margin-bottom: 18px;
     letter-spacing: 2px;
     font-weight: 700;
-    
     background: linear-gradient(
         90deg, 
         #ff0000, 
@@ -144,34 +139,26 @@ body {
         #ff0000
     );
     background-size: 400% 400%;
-    
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
     animation: rainbowGlow 6s linear infinite;
 }
 
 @keyframes rainbowGlow {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* ====================================================
-   ส่วนไอคอนโซเชียล
+   ไอคอนโซเชียล
    ==================================================== */
 .social-icons {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .social-icons a {
@@ -186,7 +173,7 @@ body {
 }
 
 /* ====================================================
-   ส่วนเครื่องเล่นเพลง (Music Player UI)
+   เครื่องเล่นเพลง (Music Player UI)
    ==================================================== */
 .music-player-ux {
     background: rgba(0, 0, 0, 0.4);
@@ -196,6 +183,7 @@ body {
     gap: 15px;
     align-items: center;
     text-align: left;
+    margin-bottom: 15px;
 }
 
 .song-cover {
@@ -204,7 +192,6 @@ body {
     border-radius: 12px;
     object-fit: cover;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
 }
 
 .song-details {
@@ -284,29 +271,116 @@ body {
 }
 
 /* ====================================================
-   Responsive Breakpoints สำหรับมือถือ
+   MARIO PIXEL STAGE (ส่วนมาริโอ้กระโดด + เห็ด + กล่อง ?)
    ==================================================== */
+.mario-stage {
+    position: relative;
+    width: 100%;
+    height: 65px;
+    margin-top: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+/* พื้นดิน Mario Pixel */
+.mario-ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: repeating-linear-gradient(
+        90deg,
+        #e75a10,
+        #e75a10 8px,
+        #000 8px,
+        #000 10px
+    );
+    border-top: 2px solid #000;
+}
+
+/* กล่องปริศนา ? Block */
+.mario-block {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    background: #fc9838;
+    border: 2px solid #000;
+    color: #000;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 18px;
+    text-align: center;
+    font-family: monospace;
+    box-shadow: inset -2px -2px 0px #a84000, inset 2px 2px 0px #fce0a8;
+    animation: blockBounce 3s infinite ease-in-out;
+}
+
+@keyframes blockBounce {
+    0%, 40%, 100% { transform: translateX(-50%) translateY(0); }
+    45% { transform: translateX(-50%) translateY(-4px); }
+}
+
+/* Mario Pixel ตัวกระโดด */
+.mario-character {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 20px;
+    height: 24px;
+    background: #f83800; /* เสื้อหมวกสีแดง */
+    border-radius: 2px;
+    box-shadow: 
+        /* หมวกและจมูก */
+        0 -4px 0 #f83800,
+        4px -4px 0 #fc9838,
+        /* เอี๊ยมกางเกงสีน้ำเงิน */
+        0 4px 0 #0022fc,
+        -4px 4px 0 #0022fc,
+        4px 4px 0 #0022fc;
+    animation: marioRunJump 3s infinite linear;
+}
+
+@keyframes marioRunJump {
+    0% { left: -10%; bottom: 10px; }
+    35% { left: 42%; bottom: 10px; }
+    45% { left: 47%; bottom: 28px; } /* จังหวะกระโดดชนกล่อง */
+    55% { left: 52%; bottom: 10px; }
+    100% { left: 110%; bottom: 10px; }
+}
+
+/* เห็ด Mario Pixel เดินไปมา */
+.mario-mushroom {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background: #fc9838;
+    border-radius: 50% 50% 0 0;
+    box-shadow: 
+        0 -4px 0 #f83800,
+        -3px -3px 0 #f83800,
+        3px -3px 0 #f83800,
+        0 2px 0 #fff;
+    animation: mushroomWalk 5s infinite linear;
+}
+
+@keyframes mushroomWalk {
+    0% { right: -10%; }
+    50% { right: 80%; }
+    100% { right: -10%; }
+}
+
+/* Responsive มือถือ */
 @media (max-width: 380px) {
-    .profile-card {
-        padding: 20px 15px;
-    }
-
-    .profile-img-container {
-        width: 140px;
-        height: 140px;
-    }
-
-    .profile-img {
-        width: 89px;
-        height: 89px;
-    }
-
-    .username {
-        font-size: 18px;
-    }
-
-    .song-cover {
-        width: 50px;
-        height: 50px;
-    }
+    .profile-card { padding: 20px 15px 10px 15px; }
+    .profile-img-container { width: 140px; height: 140px; }
+    .profile-img { width: 89px; height: 89px; }
+    .username { font-size: 18px; }
+    .song-cover { width: 50px; height: 50px; }
 }
