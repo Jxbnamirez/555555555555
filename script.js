@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             title: "loading - central cee",
             cover: "song-cover.jpg",
-            src: "Central Cee - Loading (JJ Drill Remix) prod. Cvplis.mp3"
+            src: "song.mp3"
         },
         {
             title: "doja - central cee",
