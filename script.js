@@ -10,7 +10,6 @@ const songs = [
         title: "Beretta", 
         file: "ssstik.io_1788403678588.mp3", 
         cover: "IMG_0702.jpeg",
-        // แนะนำให้แปลงไฟล์ .mov เป็น .mp4 เพื่อความเสถียรสูงสุด
         video: "snaptik_7673838347806133511_v3.mp4" 
     }
 ];
@@ -21,6 +20,7 @@ const bgVideo = document.getElementById('bg-video');
 const videoSource = document.getElementById('video-source');
 
 const playBtn = document.getElementById('play-btn');
+const playIcon = document.getElementById('play-icon');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const progress = document.getElementById('progress');
@@ -30,40 +30,51 @@ const durationEl = document.getElementById('duration');
 const titleEl = document.getElementById('song-title');
 const coverEl = document.getElementById('song-cover');
 
-// ฟังก์ชันโหลดเนื้อหา
+// ฟังก์ชันอัปเดตไอคอนเล่น/หยุด
+function updatePlayIcon(isPlaying) {
+    if (!playIcon) return;
+    if (isPlaying) {
+        playIcon.classList.remove('fa-play');
+        playIcon.classList.add('fa-pause');
+    } else {
+        playIcon.classList.remove('fa-pause');
+        playIcon.classList.add('fa-play');
+    }
+}
+
+// ฟังก์ชันโหลดเนื้อหาเพลงและวิดีโอ
 function loadContent(song) {
     titleEl.innerText = song.title;
     audio.src = song.file;
     coverEl.src = song.cover;
     
-    // เปลี่ยนวิดีโอพื้นหลังพร้อมเช็คการเล่น
-    bgVideo.style.opacity = "0"; // ค่อยๆ จางออกตอนเปลี่ยน
-    videoSource.src = song.video;
-    
-    // สำคัญ: ต้องโหลดใหม่ทุกครั้งที่เปลี่ยน src
-    bgVideo.load(); 
-    
-    // รอให้วิดีโอพร้อมเล่นแล้วค่อยแสดงผล
-    bgVideo.oncanplay = () => {
-        bgVideo.style.opacity = "1";
-        bgVideo.play().catch(() => console.log("Video autoplay prevented"));
-    };
+    // เปลี่ยนวิดีโอพื้นหลังพร้อมเอฟเฟกต์ Fade
+    if (bgVideo && videoSource) {
+        bgVideo.style.opacity = "0";
+        videoSource.src = song.video;
+        bgVideo.load(); 
+        
+        bgVideo.oncanplay = () => {
+            bgVideo.style.opacity = "1";
+            bgVideo.play().catch(() => console.log("Video autoplay prevented"));
+        };
+    }
 }
 
-// ฟังก์ชันควบคุมการเล่น
+// ฟังก์ชันควบคุมการเล่น/หยุด
 function togglePlay() {
     if (audio.paused) {
         const audioPromise = audio.play();
         if (audioPromise !== undefined) {
             audioPromise.then(() => {
-                bgVideo.play(); // เล่นวิดีโอไปพร้อมกับเสียง
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                if (bgVideo) bgVideo.play();
+                updatePlayIcon(true);
             }).catch(error => console.log("Playback error:", error));
         }
     } else {
         audio.pause();
-        bgVideo.pause(); // หยุดวido ไปพร้อมกับเสียง
-        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        if (bgVideo) bgVideo.pause();
+        updatePlayIcon(false);
     }
 }
 
@@ -72,11 +83,10 @@ function changeSong(dir) {
     songIndex = (songIndex + dir + songs.length) % songs.length;
     loadContent(songs[songIndex]);
     
-    // รอโหลดไฟล์เสียงเสร็จแล้วเล่นทันที
     audio.oncanplay = () => {
         audio.play();
-        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        audio.oncanplay = null; // ลบ event ออกเพื่อไม่ให้ทำงานซ้ำ
+        updatePlayIcon(true);
+        audio.oncanplay = null;
     };
 }
 
@@ -113,7 +123,7 @@ function formatTime(sec) {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
 }
 
-// --- 2. เอฟเฟกต์หิมะ (ใช้โค้ดเดิมของคุณที่ทำงานได้ดีอยู่แล้ว) ---
+// --- 2. เอฟเฟกต์หิมะ (Snow Canvas) ---
 const canvas = document.getElementById('snow-canvas');
 const ctx = canvas.getContext('2d');
 let w, h, flakes = [];
@@ -152,5 +162,5 @@ window.addEventListener('resize', initSnow);
 initSnow();
 drawSnow();
 
-// เริ่มต้นโหลดเนื้อหาเพลงแรก
+// โหลดเพลงแรกเริ่มต้น
 loadContent(songs[songIndex]);
