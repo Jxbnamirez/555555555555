@@ -7,7 +7,7 @@ const songs = [
         video: "snaptik_7679024904334740757_v3.mp4" 
     },
     { 
-        title: "YOUNG J - ข่าวลือ", 
+        title: "Beretta", 
         file: "ssstik.io_1788403678588.mp3", 
         cover: "songcover2.jpg",
         // แนะนำให้แปลงไฟล์ .mov เป็น .mp4 เพื่อความเสถียรสูงสุด
